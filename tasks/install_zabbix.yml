@@ -1,3 +1,4 @@
+
 ---
 - name: "Installing repository rpm"
   get_url:
@@ -72,12 +73,12 @@
     - regexp: '^DBPassword='
       insertafter: "^# DBPassword="
       line: 'DBPassword={{ DBPassword }}'
-    - regexp: '^DBPort='
-      insertafter: "^# DBPort="
-      line: 'DBPort={{ DBPort }}'
-    - regexp: '^DBSocket='
-      insertafter: "^# DBSocket="
-      line: 'DBSocket={{ DBSocket }}'
+#    - regexp: '^DBPort='
+#      insertafter: "^# DBPort="
+#      line: 'DBPort={{ DBPort }}'
+#    - regexp: '^DBSocket='
+#      insertafter: "^# DBSocket="
+#      line: 'DBSocket={{ DBSocket }}'
   notify: 
     - restart zabbix-server
 
