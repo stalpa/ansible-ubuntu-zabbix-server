@@ -1,4 +1,6 @@
-# ansible-ubuntu-zabbix-serverrole name : ansible-zabbix-server for Ubuntu instance 
+# ansible-ubuntu-zabbix-server
+
+role name : ansible-zabbix-server for Ubuntu instance 
 
 playbook steps:
 * Install release,dependencies
