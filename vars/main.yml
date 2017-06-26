@@ -1,0 +1,36 @@
+# Here are variables related to the ZABBIX-Server installation
+#
+# /etc/php.ini
+php_date_timezone: America/Chicago
+php_post_max_size: 16M
+php_max_execution_time: 300
+php_max_input_time: 300
+php_always_populate_raw_post_data: -1
+
+#
+# ZABBIX repository specified to use in the installation
+#
+zabbix_Repository: http://repo.zabbix.com/zabbix/3.2/ubuntu/pool/main/z/zabbix-release/zabbix-release_3.2-1+xenial_all.deb
+zabbix_file: zabbix-release_3.2-1+xenial_all.deb
+
+#
+# Percona repository specified to use in the installation
+percona_Repository: https://www.percona.com/redir/downloads/percona-release/ubuntu/latest/percona-release_0.1-4.xenial_all.deb
+percona_file: percona-release_0.1-4.xenial_all.deb
+
+#
+# Database settings and ZABBIX configuration
+#  '/etc/zabbix/zabbix.conf','/etc/zabbix/web/zabbix.conf.php'
+#
+ListenPort: 10051
+LogFile: /var/log/zabbix/zabbix_server.log
+DBHost: localhost
+DBName: zabbix
+DBUser: zabbix
+DBPassword: zabbix
+DBPort: 3306
+DBSocket: /var/lib/mysql/mysql.sock
+
+#
+# name of the service
+mysql_service: mysql

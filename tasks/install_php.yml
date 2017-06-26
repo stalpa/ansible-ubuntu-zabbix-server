@@ -1,0 +1,47 @@
+---
+- name: "Install dependencies | Setup PHP"
+  apt: 
+    pkg: "{{ item }}" 
+    state: present
+  with_items:
+    - php7.0
+    - php7.0-mbstring
+    - php7.0-bcmath
+    - php-sabre-xml  
+  notify:
+    - restart apache2
+
+- name: "Set php timezone"
+  lineinfile: 
+     dest: '/etc/php/7.0/cli/php.ini'
+     regexp: '^date.timezone ='
+     insertafter: '^;date.timezone ='
+     line: "date.timezone = {{ php_date_timezone }}"
+
+- name: "Set php post_max_size"
+  lineinfile:
+     state: present
+     dest: '/etc/php/7.0/cli/php.ini'
+     regexp: '^(#)?post_max_size = \d'
+     line: "post_max_size = {{ php_post_max_size }}"
+
+- name: "Set php max_execution_time"
+  lineinfile:
+     state: present
+     dest: '/etc/php/7.0/cli/php.ini'
+     regexp: '^(#)?max_execution_time = \d'
+     line: "max_execution_time = {{ php_max_execution_time }}"
+
+- name: "Set php max_input_time"
+  lineinfile:
+     state: present
+     dest: '/etc/php/7.0/cli/php.ini'
+     regexp: '^(#)?max_input_time = \d'
+     line: "max_input_time = {{ php_max_input_time }}"
+
+- name: "Set php always_populate_raw_post_data"
+  lineinfile: 
+     dest: '/etc/php/7.0/cli/php.ini'
+     regexp: '^always_populate_raw_post_data ='
+     insertafter: '^;always_populate_raw_post_data ='
+     line: "always_populate_raw_post_data = {{ php_always_populate_raw_post_data }}"
