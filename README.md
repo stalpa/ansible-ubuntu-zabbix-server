@@ -1,8 +1,6 @@
 role name : ansible-zabbix-server for Ubuntu instance 
 
 playbook steps:
-* Install release,dependencies
-install_epel.yml
 * Install apache2
 install_httpd.yml
 * Install and setup Percona DB

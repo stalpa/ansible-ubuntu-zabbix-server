@@ -1,18 +1,17 @@
 
 ---
-- name: "Installing repository rpm"
-  get_url:
-    url: "{{ percona_Repository }}"
-    dest: /tmp
-- shell: dpkg -i /tmp/"{{ percona_file }}"
+#- name: "Installing repository rpm"
+#  get_url:
+#    url: "{{ percona_Repository }}"
+#    dest: /tmp
+#- shell: dpkg -i /tmp/"{{ percona_file }}"
 
-- name: "Install MySQL"
-  apt:
-    name: "{{ item }}"
-    state: present
-  with_items:
-    - percona-server-server-5.6
-
+#- name: "Install MySQL"
+#  apt:
+#    name: "{{ item }}"
+#    state: present
+#  with_items:
+#    - percona-server-server-5.6
 
 - name: "Get zabbix repo"
   get_url: 
@@ -23,8 +22,8 @@
 - name: "Install zabbix-server"
   apt: 
     name: "{{ item }}"
-    #enablerepo: zabbix
     state: present
+    update_cache: yes
   with_items:
     - zabbix-server-mysql
     - zabbix-frontend-php  
@@ -55,12 +54,12 @@
     insertafter: "{{ item.insertafter }}"
     line: "{{ item.line }}"
   with_items:
-    - regexp: '^ListenPort='
-      insertafter: "^# ListenPort="
-      line: 'ListenPort={{ ListenPort }}'
-    - regexp: '^LogFile='
-      insertafter: "^# LogFile="
-      line: 'LogFile={{ LogFile }}'
+#    - regexp: '^ListenPort='
+#      insertafter: "^# ListenPort="
+#      line: 'ListenPort={{ ListenPort }}'
+#    - regexp: '^LogFile='
+#      insertafter: "^# LogFile="
+#      line: 'LogFile={{ LogFile }}'
     - regexp: '^DBHost='
       insertafter: "^# DBHost="
       line: 'DBHost={{ DBHost }}'

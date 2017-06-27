@@ -8,6 +8,8 @@
     - php7.0-mbstring
     - php7.0-bcmath
     - php-sabre-xml  
+    - libapache2-mod-php
+    - libapache2-mod-php7.0
   notify:
     - restart apache2
 
