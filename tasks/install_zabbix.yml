@@ -1,18 +1,5 @@
 
 ---
-#- name: "Installing repository rpm"
-#  get_url:
-#    url: "{{ percona_Repository }}"
-#    dest: /tmp
-#- shell: dpkg -i /tmp/"{{ percona_file }}"
-
-#- name: "Install MySQL"
-#  apt:
-#    name: "{{ item }}"
-#    state: present
-#  with_items:
-#    - percona-server-server-5.6
-
 - name: "Get zabbix repo"
   get_url: 
     url: "{{ zabbix_Repository }}"
@@ -44,9 +31,6 @@
   shell: zcat /usr/share/doc/zabbix-server-mysql/create.sql.gz | mysql -u"{{ DBUser }}" -p"{{ DBPassword }}" "{{ DBName }}"
   when: zabbixDatabaseTables|int == 0
 
-#- name: "Copy PHP-files for Frontend zabbix-web"
-#  shell: cp -R /usr/share/zabbix/ /var/www/html/
-
 - name: "Setting zabbix_server.conf"
   lineinfile:
     dest: '/etc/zabbix/zabbix_server.conf'
@@ -54,12 +38,6 @@
     insertafter: "{{ item.insertafter }}"
     line: "{{ item.line }}"
   with_items:
-#    - regexp: '^ListenPort='
-#      insertafter: "^# ListenPort="
-#      line: 'ListenPort={{ ListenPort }}'
-#    - regexp: '^LogFile='
-#      insertafter: "^# LogFile="
-#      line: 'LogFile={{ LogFile }}'
     - regexp: '^DBHost='
       insertafter: "^# DBHost="
       line: 'DBHost={{ DBHost }}'
@@ -72,12 +50,6 @@
     - regexp: '^DBPassword='
       insertafter: "^# DBPassword="
       line: 'DBPassword={{ DBPassword }}'
-#    - regexp: '^DBPort='
-#      insertafter: "^# DBPort="
-#      line: 'DBPort={{ DBPort }}'
-#    - regexp: '^DBSocket='
-#      insertafter: "^# DBSocket="
-#      line: 'DBSocket={{ DBSocket }}'
   notify: 
     - restart zabbix-server
 
